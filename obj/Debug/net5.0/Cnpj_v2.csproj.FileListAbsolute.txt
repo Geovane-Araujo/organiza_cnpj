@@ -5,7 +5,6 @@ E:\Adonai Workspace\AdonaiSoft Sistemas\AdonaiSoft Uteis\Cnpj_v2\bin\Debug\net5.
 E:\Adonai Workspace\AdonaiSoft Sistemas\AdonaiSoft Uteis\Cnpj_v2\bin\Debug\net5.0\Cnpj_v2.dll
 E:\Adonai Workspace\AdonaiSoft Sistemas\AdonaiSoft Uteis\Cnpj_v2\bin\Debug\net5.0\ref\Cnpj_v2.dll
 E:\Adonai Workspace\AdonaiSoft Sistemas\AdonaiSoft Uteis\Cnpj_v2\bin\Debug\net5.0\Cnpj_v2.pdb
-E:\Adonai Workspace\AdonaiSoft Sistemas\AdonaiSoft Uteis\Cnpj_v2\obj\Debug\net5.0\Cnpj_v2.csproj.AssemblyReference.cache
 E:\Adonai Workspace\AdonaiSoft Sistemas\AdonaiSoft Uteis\Cnpj_v2\obj\Debug\net5.0\Cnpj_v2.GeneratedMSBuildEditorConfig.editorconfig
 E:\Adonai Workspace\AdonaiSoft Sistemas\AdonaiSoft Uteis\Cnpj_v2\obj\Debug\net5.0\Cnpj_v2.AssemblyInfoInputs.cache
 E:\Adonai Workspace\AdonaiSoft Sistemas\AdonaiSoft Uteis\Cnpj_v2\obj\Debug\net5.0\Cnpj_v2.AssemblyInfo.cs
