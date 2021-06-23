@@ -85,109 +85,119 @@ namespace Cnpj_v2
                 while ((linha = file.ReadLine()) != null)
                 {
                     String[] empresa = linha.Split("\";");
-
-                    cnpj = empresa[0].Replace("\"", "") + empresa[1].Replace("\"", "") + empresa[2].Replace("\"", "");
-                    tipo = Convert.ToInt32(empresa[3].Replace("\"", ""));
-                    fantasia = empresa[4].Replace("\"", "");
-                    situacao = empresa[5].Replace("\"", "");
-                    
-                    motivosituacao = empresa[7].Replace("\"", "");
-                    nomecidadeexterior = empresa[8].Replace("\"", "");
-                    pais = empresa[9].Replace("\"", "");
-                    
-                    cnaeprincipal = empresa[11].Replace("\"", "");
-                    tipologradouro = empresa[13].Replace("\"", "");
-                    logradouro = empresa[14].Replace("\"", "");
-                    numero = empresa[15].Replace("\"", "");
-                    complemento = empresa[16].Replace("\"", "");
-                    bairro = empresa[17].Replace("\"", "");
-                    cep = empresa[18].Replace("\"", "");
-                    uf = empresa[19].Replace("\"", "");
-                    municipio = Convert.ToInt32(empresa[20].Replace("\"", ""));
-                    telefoneprincipal = empresa[21].Replace("\"", "") + empresa[22].Replace("\"", "");
-                    telefonesecundario = empresa[23].Replace("\"", "") + empresa[24].Replace("\"", "");
-                    email = empresa[27].Replace("\"", "");
-                    situacaoespecial = empresa[28].Replace("\"", "");
-
                     command = new MySql.Data.MySqlClient.MySqlCommand(sql, con);
-
-                    command.Parameters.AddWithValue("@cnpj", cnpj);
-                    command.Parameters.AddWithValue("@tipo", tipo);
-                    command.Parameters.AddWithValue("@fantasia", fantasia);
-                    command.Parameters.AddWithValue("@situacao", situacao);
-
-                    if (validaDados(empresa[6].Replace("\"", "").Replace("\n", "")) == null)
-                        command.Parameters.AddWithValue("@datasituacao", DBNull.Value);
-                    else
-                    {
-                        command.Parameters.AddWithValue("@datasituacao", intToDate(empresa[6].Replace("\"", "").Replace("\n", "")));
-                    }
-                        
-
-                    command.Parameters.AddWithValue("@motivosituacao", motivosituacao);
-                    command.Parameters.AddWithValue("@nomecidadeexterior", nomecidadeexterior);
-                    command.Parameters.AddWithValue("@pais", pais);
-
-                    if (validaDados(empresa[10].Replace("\"", "").Replace("\n", "")) == null)
-                        command.Parameters.AddWithValue("@inicioatividade", DBNull.Value);
-                    else
-                        command.Parameters.AddWithValue("@inicioatividade", intToDate(empresa[10].Replace("\"", "").Replace("\n", "")));
-
-                    command.Parameters.AddWithValue("@cnaeprincipal", cnaeprincipal);
-                    command.Parameters.AddWithValue("@tipologradouro", tipologradouro);
-                    command.Parameters.AddWithValue("@logradouro", logradouro);
-                    command.Parameters.AddWithValue("@numero", numero);
-                    command.Parameters.AddWithValue("@complemento", TrucateString(complemento,50));
-                    command.Parameters.AddWithValue("@bairro", TrucateString(bairro,70));
-                    command.Parameters.AddWithValue("@cep", cep);
-                    command.Parameters.AddWithValue("@uf", uf);
-                    command.Parameters.AddWithValue("@municipio", municipio);
-                    command.Parameters.AddWithValue("@telefoneprincipal", telefoneprincipal);
-                    command.Parameters.AddWithValue("@telefonesecundario", telefonesecundario);
-                    command.Parameters.AddWithValue("@email", email);
-                    command.Parameters.AddWithValue("@situacaoespecial", situacaoespecial);
-
-                    if (validaDados(empresa[29].Replace("\"", "").Replace("\n", "")) == null)
-                        command.Parameters.AddWithValue("@datasituacaoespecial", DBNull.Value);
-                    else
-                        command.Parameters.AddWithValue("@datasituacaoespecial", intToDate(empresa[29].Replace("\"", "").Replace("\n", "")));
-
                     try
                     {
-                        command.ExecuteNonQuery();
-                        idempresa = command.LastInsertedId;
-                        command.Dispose();
-                        Console.WriteLine(caminho + " " + i + " Empresa: " + fantasia);
-                    }
-                    catch (Exception ex)
-                    {
-                        sw.WriteLine(empresa.ToString());
-                        Console.WriteLine(ex.Message);
-                    }
-                    command.Parameters.Clear();
+                        cnpj = empresa[0].Replace("\"", "") + empresa[1].Replace("\"", "") + empresa[2].Replace("\"", "");
+                        tipo = Convert.ToInt32(empresa[3].Replace("\"", ""));
+                        fantasia = empresa[4].Replace("\"", "");
+                        situacao = empresa[5].Replace("\"", "");
 
-                    foreach(String cnae in empresa[11].Replace("\"", "").Split(","))
-                    {
-                        command = new MySql.Data.MySqlClient.MySqlCommand(sqlcnae, con);
-                        command.Parameters.AddWithValue("@cnae", cnae);
-                        command.Parameters.AddWithValue("@idempresa", idempresa);
+                        motivosituacao = empresa[7].Replace("\"", "");
+                        nomecidadeexterior = empresa[8].Replace("\"", "");
+                        pais = empresa[9].Replace("\"", "");
+
+                        cnaeprincipal = empresa[11].Replace("\"", "");
+                        tipologradouro = empresa[13].Replace("\"", "");
+                        logradouro = empresa[14].Replace("\"", "");
+                        numero = empresa[15].Replace("\"", "");
+                        complemento = empresa[16].Replace("\"", "");
+                        bairro = empresa[17].Replace("\"", "");
+                        cep = empresa[18].Replace("\"", "");
+                        uf = empresa[19].Replace("\"", "");
+                        municipio = Convert.ToInt32(empresa[20].Replace("\"", ""));
+                        telefoneprincipal = empresa[21].Replace("\"", "") + empresa[22].Replace("\"", "");
+                        telefonesecundario = empresa[23].Replace("\"", "") + empresa[24].Replace("\"", "");
+                        email = empresa[27].Replace("\"", "");
+                        situacaoespecial = empresa[28].Replace("\"", "");
+
+
+                        command.Parameters.AddWithValue("@cnpj", cnpj);
+                        command.Parameters.AddWithValue("@tipo", tipo);
+                        command.Parameters.AddWithValue("@fantasia", fantasia);
+                        command.Parameters.AddWithValue("@situacao", situacao);
+
+                        if (validaDados(empresa[6].Replace("\"", "").Replace("\n", "")) == null)
+                            command.Parameters.AddWithValue("@datasituacao", DBNull.Value);
+                        else
+                        {
+                            command.Parameters.AddWithValue("@datasituacao", intToDate(empresa[6].Replace("\"", "").Replace("\n", "")));
+                        }
+
+
+                        command.Parameters.AddWithValue("@motivosituacao", motivosituacao);
+                        command.Parameters.AddWithValue("@nomecidadeexterior", nomecidadeexterior);
+                        command.Parameters.AddWithValue("@pais", pais);
+
+                        if (validaDados(empresa[10].Replace("\"", "").Replace("\n", "")) == null)
+                            command.Parameters.AddWithValue("@inicioatividade", DBNull.Value);
+                        else
+                            command.Parameters.AddWithValue("@inicioatividade", intToDate(empresa[10].Replace("\"", "").Replace("\n", "")));
+
+                        command.Parameters.AddWithValue("@cnaeprincipal", cnaeprincipal);
+                        command.Parameters.AddWithValue("@tipologradouro", tipologradouro);
+                        command.Parameters.AddWithValue("@logradouro", logradouro);
+                        command.Parameters.AddWithValue("@numero", numero);
+                        command.Parameters.AddWithValue("@complemento", TrucateString(complemento, 50));
+                        command.Parameters.AddWithValue("@bairro", TrucateString(bairro, 70));
+                        command.Parameters.AddWithValue("@cep", cep);
+                        command.Parameters.AddWithValue("@uf", uf);
+                        command.Parameters.AddWithValue("@municipio", municipio);
+                        command.Parameters.AddWithValue("@telefoneprincipal", telefoneprincipal);
+                        command.Parameters.AddWithValue("@telefonesecundario", telefonesecundario);
+                        command.Parameters.AddWithValue("@email", email);
+                        command.Parameters.AddWithValue("@situacaoespecial", situacaoespecial);
+
+                        if (validaDados(empresa[29].Replace("\"", "").Replace("\n", "")) == null)
+                            command.Parameters.AddWithValue("@datasituacaoespecial", DBNull.Value);
+                        else
+                            command.Parameters.AddWithValue("@datasituacaoespecial", intToDate(empresa[29].Replace("\"", "").Replace("\n", "")));
+
                         try
                         {
                             command.ExecuteNonQuery();
+                            idempresa = command.LastInsertedId;
                             command.Dispose();
+                            Console.WriteLine(caminho + " " + i + " Empresa: " + fantasia);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             sw.WriteLine(empresa.ToString());
                             Console.WriteLine(ex.Message);
                         }
                         command.Parameters.Clear();
+
+                        foreach (String cnae in empresa[11].Replace("\"", "").Split(","))
+                        {
+                            command = new MySql.Data.MySqlClient.MySqlCommand(sqlcnae, con);
+                            command.Parameters.AddWithValue("@cnae", cnae);
+                            command.Parameters.AddWithValue("@idempresa", idempresa);
+                            try
+                            {
+                                command.ExecuteNonQuery();
+                                command.Dispose();
+                            }
+                            catch (Exception ex)
+                            {
+                                sw.WriteLine(empresa.ToString());
+                                Console.WriteLine(ex.Message);
+                            }
+                            command.Parameters.Clear();
+                        }
+
+                    }
+                    catch(Exception ex)
+                    {
+                        sw.WriteLine(empresa.ToString());
+                        Console.WriteLine(ex.Message);
                     }
 
+                    command.Parameters.Clear();
                     i++;
                 }
 
                 con.Close();
+                sw.Close();
             } 
         }
 
